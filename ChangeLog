@@ -1,0 +1,27 @@
+------------------------------------------------------------
+User: jrb  Sun Jun  8 10:06:40 PDT 2008
+MootSvc
+
+Log Message:
+first import of MootSvc pkg
+
+Status:
+
+Vendor Tag:	GLAST
+Release Tags:	v1r0
+		
+N MootSvc/.cvsignore
+N MootSvc/cmt/requirements
+N MootSvc/cmt/.cvsignore
+N MootSvc/src/MootSvc.h
+N MootSvc/src/mainpage.h
+N MootSvc/src/defaultOptions.txt
+N MootSvc/src/MootSvc.cxx
+N MootSvc/src/Dll/MootSvc_load.cxx
+N MootSvc/src/Dll/MootSvc_dll.cxx
+N MootSvc/doc/release.notes
+N MootSvc/MootSvc/IMootSvc.h
+
+No conflicts created by this import
+
+    *
