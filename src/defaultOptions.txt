@@ -1,0 +1,33 @@
+// Job options needed to access MOOT database and archive
+
+ApplicationMgr.DLLs   += {"MootSvc"};
+
+ApplicationMgr.ExtSvc += {"MootSvc"};
+
+// Job options and default values are listed below
+// See mainpage.h for a complete description of job options 
+// MootSvc.MootArchive="";
+//   default of empty string causes production archive
+//   (now at /afs/slac.stanford.edu/g/glast/moot/archive_mood) to be used
+//   otherwise should be defined to be root directory of archive desired
+// MootSvc.MootConfigKey=0;
+//   By default, discover Moot config for data from the data itself.
+//   If non-zero, use specified value.  Determines start time and 
+//   hardware key (fmx logical key for LATC master file), possibly
+//   over-riding settings for StartTime, UseEventKeys and scid
+// MootSvc.UseEventKeys="true";
+//   If true, use hw key, sw key from data
+// MootSvc.StartTime=0;
+//   Default value of 0 indicates start time value should be read from data;
+//   otherwise use specified value (to determine moot config key)
+// MootSvc.scid=0; 
+//   default of 0 indicates scid (source id) should be read from data; else
+//   use specified value when looking up moot config key.  scid will be 77
+//   for flight data taken with the LAT instrument.
+// MootSvc.noMoot="false";
+//   If set to true, no Moot dbs connection will be made.  Any call to
+//   a Moot service requiring a db connection will immediately
+//   return with an error.
+// MootSvc.Verbose="false";
+//   If true many informational messages concerning dbs transactions will
+//   be printed.

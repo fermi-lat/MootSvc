@@ -1,0 +1,11 @@
+sun4x_*
+i386_linux*
+rh9*
+rhel*
+Linux-i686
+rh7*
+Win32*
+Visual
+setup.*
+*.mak*
+VC8*
