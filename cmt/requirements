@@ -1,0 +1,41 @@
+package MootSvc
+
+# $Header: $
+
+version v1r0
+
+author Joanne Bogart <jrb@slac.stanford.edu>
+
+use GlastPolicy v*
+
+apply_pattern compontent_library library=MootSvc
+
+apply_pattern package_include
+use CalibData v0r*
+use mootCore v1r*
+use xmlBase  v*      
+use facilities v*
+
+private
+use GaudiInterface * IExternal
+use XMLEXT * IExternal v5r2*
+use MYSQLEXT * IExternal v*
+
+use LdfEvent v*
+use Event    v*
+
+## Following line doesn't appear in real requirements, though maybe it should,
+## because GlastSvc and RootIo already drag in Event
+
+##use GlastSvc v9r* -no_auto_imports
+##use RootIo v* -no_auto_imports
+
+use Event v11r* -no_auto_imports
+##use rootTestData v* -no_auto_imports
+
+# Only needed if this package has its own test program
+##use gr_app v*
+
+apply_pattern package_headers
+
+library MootSvc *.cxx Dll/*.cxx $(MootSvc_headers)
