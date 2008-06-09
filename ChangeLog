@@ -1,4 +1,15 @@
 ------------------------------------------------------------
+User: jrb  Mon Jun  9 12:47:08 PDT 2008
+MootSvc/MootSvc
+
+Modified Files:
+	IMootSvc.h 
+Log Message:
+MootSvc.h: Force re-compute of Moot key whenever it is requested.
+IMootSvc.h:  Add cautionary comments
+
+    *
+------------------------------------------------------------
 TAG
 Tag name: v1r0p1, operation: add
 Package: MootSvc
