@@ -1,4 +1,4 @@
-//$Header: /nfs/slac/g/glast/ground/cvs/CalibSvc/src/MootSvc/MootSvc.h,v 1.10 2008/05/30 22:53:22 jrb Exp $
+//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.h,v 1.1.1.1 2008/06/08 17:06:40 jrb Exp $
 #ifndef MootCnvSvc_h
 #define MootCnvSvc_h  1
 
@@ -67,7 +67,10 @@ class MootSvc :  public Service,
 
   /// Return Moot config key for current acquisition
   /// Return 0 if unknown
-  virtual unsigned getMootConfigKey() {return m_mootConfigKey;}
+  virtual unsigned getMootConfigKey() {
+    updateFswEvtInfo();   // force re-compute just in case
+    return m_mootConfigKey;
+  }
 
   /// Return absolute path for parameter source file of specified class.
   /// If none return empty string.
