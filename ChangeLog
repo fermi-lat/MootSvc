@@ -1,5 +1,16 @@
 ------------------------------------------------------------
 User: jrb  Mon Jun  9 12:47:08 PDT 2008
+MootSvc/src
+
+Modified Files:
+	MootSvc.h 
+Log Message:
+MootSvc.h: Force re-compute of Moot key whenever it is requested.
+IMootSvc.h:  Add cautionary comments
+
+    *
+------------------------------------------------------------
+User: jrb  Mon Jun  9 12:47:08 PDT 2008
 MootSvc/MootSvc
 
 Modified Files:
