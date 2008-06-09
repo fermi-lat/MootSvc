@@ -1,6 +1,6 @@
 package MootSvc
 
-# $Header: $
+# $Header: /nfs/slac/g/glast/ground/cvs/MootSvc/cmt/requirements,v 1.1.1.1 2008/06/08 17:06:39 jrb Exp $
 
 version v1r0
 
@@ -8,7 +8,7 @@ author Joanne Bogart <jrb@slac.stanford.edu>
 
 use GlastPolicy v*
 
-apply_pattern compontent_library library=MootSvc
+apply_pattern component_library library=MootSvc
 
 apply_pattern package_include
 use CalibData v0r*
