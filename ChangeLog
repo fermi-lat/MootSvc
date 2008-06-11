@@ -1,4 +1,15 @@
 ------------------------------------------------------------
+User: jrb  Tue Jun 10 17:00:32 PDT 2008
+MootSvc/MootSvc
+
+Modified Files:
+	IMootSvc.h 
+Log Message:
+Add new routines to a) find out whether moot config was in job options or not
+b) return parm info for well-known parms (GEM, ROI)
+
+    *
+------------------------------------------------------------
 TAG
 Tag name: MootSvc-01-00-02, operation: add
 Package: MootSvc
