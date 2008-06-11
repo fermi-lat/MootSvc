@@ -1,4 +1,4 @@
-//$Header: /nfs/slac/g/glast/ground/cvs/CalibSvc/src/MootSvc/MootSvc.cxx,v 1.15 2008/05/30 23:30:14 jrb Exp $
+//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.cxx,v 1.1.1.1 2008/06/08 17:06:40 jrb Exp $
 #include <cstdio>
 #include <cstdlib>
 #include <stdexcept>
@@ -128,31 +128,39 @@ StatusCode MootSvc::initialize()
       // Normally would be a fatal error.  Let it go for testing
       // return StatusCode::FAILURE;
     }      
-    return StatusCode::SUCCESS;
   }
+  else {
+    // If StartTime has been set to default (0) we'll look it up in event;
+    // else use specified value.  Similarly for scid
 
-  // If StartTime has been set to default (0) we'll look it up in event;
-  // else use specified value.  Similarly for scid
-
-  if (m_scid == 0) {
-    m_lookUpScid = true;
-  }
-  if (m_startTime == 0) {
-    m_lookUpStartTime = true;
-    m_mootConfigKey = 0;
-  }  else {
-    m_lookUpStartTime = false;
-    if (!m_lookUpScid) { // can look up config now
-      m_mootConfigKey = lookupMootConfig(m_q, m_scid, m_startTime);
-      if (!m_mootConfigKey) {
-        log << MSG::ERROR << "No MOOT config for scid = " << m_scid
-            << " and StartedAt = " << m_startTime << endreq;
-        return StatusCode::FAILURE;
-      }
-      m_fixedConfig = true;
+    if (m_scid == 0) {
+      m_lookUpScid = true;
     }
-  }
- 
+    if (m_startTime == 0) {
+      m_lookUpStartTime = true;
+      m_mootConfigKey = 0;
+    }  else {
+      m_lookUpStartTime = false;
+      if (!m_lookUpScid) { // can look up config now
+        m_mootConfigKey = lookupMootConfig(m_q, m_scid, m_startTime);
+        if (!m_mootConfigKey) {
+          log << MSG::ERROR << "No MOOT config for scid = " << m_scid
+              << " and StartedAt = " << m_startTime << endreq;
+          return StatusCode::FAILURE;
+        }
+        m_fixedConfig = true;
+      
+        // Use it to look up hw key as well
+        m_hw = m_q->getMasterKey(m_mootConfigKey);
+        if (!m_hw) {
+          log << MSG::ERROR << "No LATC master associated with MOOT config "
+              << m_mootConfigKey << endreq;
+          // Normally would be a fatal error.  Let it go for testing
+          // return StatusCode::FAILURE;
+        }
+      }
+    }
+  } 
   // Arrange to be woken up once per event.  For now can't think of
   // anything handler needs to do except for 1st event
   IIncidentSvc* incSvc;
@@ -401,18 +409,25 @@ StatusCode  MootSvc::updateFswEvtInfo() {
     }
     if (newMasterKey)     m_hw = newMasterKey;
   }
+
+  // Will have to recalculate moot key if scid or start time change
+  bool recalculate = false;
   if (m_lookUpScid) {  
     SmartDataPtr<LsfEvent::LsfCcsds> ccsds(m_eventSvc, "/Event/Ccsds");
     if (!ccsds) {
       log << MSG::DEBUG << "No ccsds" << endreq;
       return StatusCode::FAILURE;
     }
-    m_scid = ccsds->scid();
+    unsigned newScid = ccsds->scid();
+    if (newScid != m_scid) {
+      m_scid = ccsds->scid();
+      recalculate = true;
+    }
   }
   if (m_lookUpStartTime) {
     unsigned old = m_startTime;
     m_startTime = (metaEvt->run()).startTime();
-    if (old != m_startTime) { // also refresh config
+    if (recalculate || (old != m_startTime)) { // also refresh config
       if (!m_q) {
         m_q = makeConnection(m_verbose);
         if (!m_q) return StatusCode::FAILURE;
@@ -557,6 +572,30 @@ unsigned MootSvc::getHardwareKey()  {
   return m_hw;
 }
 
+MOOT::InfoSrc MootSvc::getInfoItemSrc(MOOT::InfoItem item) {
+  using MOOT::InfoItem;
+  using MOOT::InfoSrc;
+
+  switch(item) {
+  case MOOT::INFOITEM_MOOTCONFIGKEY: {
+    return (m_fixedConfig) ? MOOT::INFOSRC_JO : MOOT::INFOSRC_TDS;
+  }
+  case MOOT::INFOITEM_SCID: {
+    return (m_lookUpScid) ? MOOT::INFOSRC_TDS : MOOT::INFOSRC_JO;
+  }
+  case MOOT::INFOITEM_STARTEDAT: {
+    return (m_lookUpStartTime) ? MOOT::INFOSRC_TDS : MOOT::INFOSRC_JO;
+  }
+  case MOOT::INFOITEM_HWKEY: {
+    return (m_useEventKeys) ? MOOT::INFOSRC_TDS : MOOT::INFOSRC_JO;
+  }
+
+  default:
+    return MOOT::INFOSRC_UNKNOWN;
+  }
+
+}
+
 std::string MootSvc::getMootParmPath(const std::string& cl, unsigned& hw) {
   const CalibData::MootParm* pParm = getMootParm(cl, hw);
   if (pParm) return pParm->getSrc();
@@ -582,6 +621,40 @@ const CalibData::MootParm* MootSvc::getMootParm(const std::string& cl,
   if (ix < 0) return 0;
   else return &m_mootParmCol->m_v[ix];
 }
+
+const CalibData::MootParm* MootSvc::getGemParm(unsigned &hw) {
+  /// Search for a parm whose class name is latc_GEM_TRG_GEM.
+  std::string gemClass("latc_GEM_TRG_GEM");
+  const CalibData::MootParm* gemParm = getMootParm(gemClass, hw);
+  if (gemParm) return gemParm;
+
+  /// else search for latc_GEM. 
+  gemClass = std::string("latc_GEM");
+  getMootParm(gemClass, hw);
+  if (gemParm) return gemParm;
+
+  /// else - last resort - look for latc_DFT
+  gemClass = std::string("latc_DFT");
+  return getMootParm(gemClass, hw);
+}
+
+const CalibData::MootParm* MootSvc::getRoiParm(unsigned &hw) {
+  /// Search for a parm whose class name is latc_GEM_TRG_ROI.
+  std::string gemClass("latc_GEM_TRG_ROI");
+  const CalibData::MootParm* gemParm = getMootParm(gemClass, hw);
+  if (gemParm) return gemParm;
+
+  /// else search for latc_GEM. 
+  gemClass = std::string("latc_GEM");
+  gemParm = getMootParm(gemClass,hw);
+  if (gemParm) return gemParm;
+
+  /// else - last resort - look for latc_DFT
+  gemClass = std::string("latc_DFT");
+  return getMootParm(gemClass, hw);
+}
+
+
 
 const CalibData::MootParmCol* MootSvc::getMootParmCol(unsigned& hw)  {
 

@@ -1,4 +1,4 @@
-//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/MootSvc/IMootSvc.h,v 1.1.1.1 2008/06/08 17:06:40 jrb Exp $
+//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/MootSvc/IMootSvc.h,v 1.2 2008/06/09 19:47:07 jrb Exp $
 #ifndef IMootSvc_h
 #define IMootSvc_h 1
 
@@ -18,6 +18,21 @@ namespace CalibData {
   class MootParm;
   class MootParmCol;
   class MootFilterCfg;
+}
+
+namespace MOOT {
+  enum InfoSrc {
+    INFOSRC_UNKNOWN = 0,
+    INFOSRC_TDS = 1,
+    INFOSRC_JO = 2
+  };
+
+  enum InfoItem {
+    INFOITEM_MOOTCONFIGKEY = 0,
+    INFOITEM_SCID = 1,
+    INFOITEM_STARTEDAT = 2,
+    INFOITEM_HWKEY = 3
+  };
 }
 
 static const InterfaceID IID_IMootSvc ("IMootSvc", 1, 0);
@@ -58,6 +73,15 @@ public:
                                             unsigned handlerId,
                                             std::string& handlerName)=0;
 
+  /// See enum definitions for source (TDS or job options) and items
+  /// (scid, etc.) in IMootSvc.h.
+  /// Note if Moot config key is set in job options, all other items
+  /// (scid, start time, hw key) are derived from this key, hence are
+  ///  also considered to be set from job options.  
+  /// Similarly if both start time and scid are set in job options, other
+  /// items may be derived, so all are considered to be set from jo
+  virtual MOOT::InfoSrc getInfoItemSrc(MOOT::InfoItem item)=0;
+
   /// Return Moot config key for current acquisition
   virtual unsigned getMootConfigKey()=0;
 
@@ -66,6 +90,13 @@ public:
   virtual std::string getMootParmPath(const std::string& cl, 
                                       unsigned& hw)=0;
 
+  /// Return parm containing GEM registers (not necessarily
+  /// ROI though)
+  virtual const CalibData::MootParm* getGemParm(unsigned& hw)=0;
+
+  /// Return parm containing ROI registers (not necessarily
+  /// other GEM registers though)
+  virtual const CalibData::MootParm* getRoiParm(unsigned& hw)=0;
 
   /// Return MootParm structure for parameter source file of specified class.
   /// If none return blank structure.
