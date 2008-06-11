@@ -1,5 +1,16 @@
 ------------------------------------------------------------
 User: jrb  Tue Jun 10 17:00:32 PDT 2008
+MootSvc/src
+
+Modified Files:
+	MootSvc.cxx MootSvc.h 
+Log Message:
+Add new routines to a) find out whether moot config was in job options or not
+b) return parm info for well-known parms (GEM, ROI)
+
+    *
+------------------------------------------------------------
+User: jrb  Tue Jun 10 17:00:32 PDT 2008
 MootSvc/MootSvc
 
 Modified Files:
