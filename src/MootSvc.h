@@ -1,4 +1,4 @@
-//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.h,v 1.1.1.1 2008/06/08 17:06:40 jrb Exp $
+//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.h,v 1.2 2008/06/09 19:47:08 jrb Exp $
 #ifndef MootCnvSvc_h
 #define MootCnvSvc_h  1
 
@@ -65,6 +65,15 @@ class MootSvc :  public Service,
   /// Return last LATC master key seen in data
   virtual unsigned getHardwareKey();
 
+  /// See enum definitions for source (TDS or job options) and items
+  /// (scid, etc.) in IMootSvc.h.
+  /// Note if Moot config key is set in job options, all other items
+  /// (scid, start time, hw key) are derived from this key, hence are
+  ///  also considered to be set from job options.  
+  /// Similarly if both start time and scid are set in job options, other
+  /// items may be derived, so all are considered to be set from jo
+  virtual MOOT::InfoSrc getInfoItemSrc(MOOT::InfoItem item);
+
   /// Return Moot config key for current acquisition
   /// Return 0 if unknown
   virtual unsigned getMootConfigKey() {
@@ -76,10 +85,18 @@ class MootSvc :  public Service,
   /// If none return empty string.
   std::string getMootParmPath(const std::string& cl, unsigned& hw);
 
+  /// Return parm with GEM info.  Does not necessarily include ROI
+  virtual const CalibData::MootParm* getGemParm(unsigned& hw);
+
+  /// Return parm containing ROI registers (not necessarily
+  /// other GEM registers though)
+  virtual const CalibData::MootParm* getRoiParm(unsigned& hw);
+
+
   /// Return MootParm structure for parameter source file of specified class.
   /// If none return blank structure.
   virtual const CalibData::MootParm* getMootParm(const std::string& cl, 
-                                           unsigned& hw);
+                                                 unsigned& hw);
 
   // Return pointer to Moot parameter collection.  Also set output
   // arg. hw to current hw key
