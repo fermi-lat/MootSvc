@@ -3,6 +3,8 @@
  * Coordinator:  J. Bogart
  *                  EOH
 
+   v1r1    10-Jun-2008  jrb  New services; also bug fix in init when moot key
+                             comes from job options
    v1r0p2   9-Jun-2008  jrb  Minor fix
    v1r0p1   9-Jun-2008  jrb  Fix typo in requirements (thanks, Tracy)
    v1r0    03-Jun-2008  jrb  Initial release
