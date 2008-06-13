@@ -42,6 +42,11 @@
         <dd>Source id for data.  Defaults to 77, value for flight data.
          Special value of 0 means look it up in the data.
         </dd>
+    <dt>ExitOnFatal</dt>
+        <dd>Defaults to "true". Causes job to exit in various circumstances
+            where config keys of one sort or another are absent, inconsistent,
+            etc.
+        </dd>
     <dt>noMoot</dt>
         <dd>Defaults to "false".  If true, MootSvc will not attempt
             to connect to Moot archive and db.  Subsequent calls

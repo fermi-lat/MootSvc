@@ -24,6 +24,8 @@ ApplicationMgr.ExtSvc += {"MootSvc"};
 //   default of 0 indicates scid (source id) should be read from data; else
 //   use specified value when looking up moot config key.  scid will be 77
 //   for flight data taken with the LAT instrument.
+// MootSvc.ExitOnFatal="true";    
+//   Just what it says
 // MootSvc.noMoot="false";
 //   If set to true, no Moot dbs connection will be made.  Any call to
 //   a Moot service requiring a db connection will immediately
