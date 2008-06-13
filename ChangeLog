@@ -1,4 +1,15 @@
 ------------------------------------------------------------
+User: jrb  Fri Jun 13 11:33:37 PDT 2008
+MootSvc/src
+
+Modified Files:
+	MootSvc.cxx MootSvc.h defaultOptions.txt mainpage.h 
+Log Message:
+Add ExitOnFatal job option (defaults to true)
+Avoid looking up stuff more than once per event
+
+    *
+------------------------------------------------------------
 TAG
 Tag name: MootSvc-01-01-00, operation: add
 Package: MootSvc
