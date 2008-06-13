@@ -1,4 +1,4 @@
-//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.cxx,v 1.1.1.1 2008/06/08 17:06:40 jrb Exp $
+//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.cxx,v 1.2 2008/06/11 00:00:32 jrb Exp $
 #include <cstdio>
 #include <cstdlib>
 #include <stdexcept>
@@ -34,6 +34,25 @@ const ISvcFactory& MootSvcFactory = MootSvc_factory;
 
 namespace {
 
+  StatusCode lookupMaster(SmartDataPtr<LsfEvent::MetaEvent>& metaEvt,
+                          unsigned* masterKey) {
+    using namespace enums;
+    switch (metaEvt->keyType()) {
+    case Lsf::LpaKeys: {
+      const lsfData::LpaKeys *lpaKeysTds = metaEvt->keys()->castToLpaKeys();
+      *masterKey = lpaKeysTds->LATC_master();
+      break;
+    }
+    case Lsf::LciKeys: {
+      const lsfData::LciKeys *lciKeysTds = metaEvt->keys()->castToLciKeys();
+      *masterKey = lciKeysTds->LATC_master();
+      break;
+    }
+    default: 
+      return StatusCode::FAILURE;
+    }
+    return StatusCode::SUCCESS;
+  }
   unsigned lookupMootConfig(MOOT::MootQuery* q, unsigned scid,
                             unsigned startedAt) {
 
@@ -60,7 +79,8 @@ namespace {
 }
 
 MootSvc::MootSvc(const std::string& name, ISvcLocator* svc)
-  : Service(name, svc), m_q(0), m_c(0), m_fixedConfig(false), m_mootParmCol(0)
+  : Service(name, svc), m_q(0), m_c(0), m_nEvent(0), m_fixedConfig(false), 
+    m_mootParmCol(0)
 {
   declareProperty("MootArchive", m_archive = std::string("") );
   declareProperty("UseEventKeys", m_useEventKeys = true);
@@ -69,6 +89,7 @@ MootSvc::MootSvc(const std::string& name, ISvcLocator* svc)
   declareProperty("StartTime", m_startTime = 0);
   declareProperty("MootConfigKey", m_mootConfigKey = 0);
   declareProperty("NoMoot", m_noMoot = false);
+  declareProperty("ExitOnFatal", m_exitOnFatal = true);
 }
 
 MootSvc::~MootSvc(){ }
@@ -123,10 +144,13 @@ StatusCode MootSvc::initialize()
     m_useEventKeys = false;
     m_hw = m_q->getMasterKey(m_mootConfigKey);
     if (!m_hw) {
-      log << MSG::ERROR << "No LATC master associated with MOOT config "
+      log << MSG::FATAL << "No LATC master associated with MOOT config "
           << m_mootConfigKey << endreq;
-      // Normally would be a fatal error.  Let it go for testing
-      // return StatusCode::FAILURE;
+      if (m_exitOnFatal) {
+        log << MSG::FATAL << "MootSvc exiting on fatal error.." << endreq;
+        exit(1);
+      }
+      return StatusCode::FAILURE;
     }      
   }
   else {
@@ -144,8 +168,13 @@ StatusCode MootSvc::initialize()
       if (!m_lookUpScid) { // can look up config now
         m_mootConfigKey = lookupMootConfig(m_q, m_scid, m_startTime);
         if (!m_mootConfigKey) {
-          log << MSG::ERROR << "No MOOT config for scid = " << m_scid
+          log << MSG::FATAL
+              << "No MOOT config for scid = " << m_scid
               << " and StartedAt = " << m_startTime << endreq;
+          if (m_exitOnFatal) {
+            log << MSG::FATAL << "MootSvc exiting on fatal error.." << endreq;
+            exit(1);
+          }
           return StatusCode::FAILURE;
         }
         m_fixedConfig = true;
@@ -155,8 +184,11 @@ StatusCode MootSvc::initialize()
         if (!m_hw) {
           log << MSG::ERROR << "No LATC master associated with MOOT config "
               << m_mootConfigKey << endreq;
-          // Normally would be a fatal error.  Let it go for testing
-          // return StatusCode::FAILURE;
+          if (m_exitOnFatal) {
+            log << MSG::FATAL << "MootSvc exiting on fatal error.." << endreq;
+            exit(1);
+          }
+          return StatusCode::FAILURE;
         }
       }
     }
@@ -336,6 +368,7 @@ void MootSvc::handle(const Incident& inc) {
       closeConnection();
     }
   }
+  ++m_nEvent;
 }
 
 
@@ -363,55 +396,42 @@ int MootSvc::latcParmIx(const std::string& parmClass) const {
 // end of the first event and also whenever a client requests 
 // supported information types (LATC, filter)
 StatusCode  MootSvc::updateFswEvtInfo() {
-  // For now either we update from event or we don't update at all
-  using namespace enums;
+  if (m_fixedConfig) return StatusCode::SUCCESS; // nothing to do if fixed cfg
 
-  //  if ((!m_useEventKeys) && (!m_lookUpStartTime) &&
-  //  (!m_lookUpScid) ) return  StatusCode::SUCCESS;
+  static int nEvent = -1;
 
-  // If nothing comes from data, there is nothing for us to do 
-  if (m_fixedConfig) return StatusCode::SUCCESS;
+  // If our cached value of event = m_nEvent we already were called
+  // this event so nothing to do.
+  if (nEvent == m_nEvent)   return StatusCode::SUCCESS;
+
+  nEvent = m_nEvent;
 
   MsgStream log(msgSvc(), "MootSvc");
-
   SmartDataPtr<Event::EventHeader> eventHeader(m_eventSvc, "/Event");
   if (!eventHeader) {
     log << "No Event header! " << endreq;
     return StatusCode::FAILURE;
   }
-
   SmartDataPtr<LsfEvent::MetaEvent> metaEvt(m_eventSvc, "/Event/MetaEvent");
   if (!metaEvt) {
     log << MSG::DEBUG << "No MetaEvent" << endreq;
     return StatusCode::FAILURE;
   }
 
+  bool hwKeyChange = false;
   if (m_useEventKeys) {
-    unsigned newMasterKey;
-    m_hw = 0;
-    switch (metaEvt->keyType()) {
-
-    case Lsf::LpaKeys: {
-      const lsfData::LpaKeys *lpaKeysTds = metaEvt->keys()->castToLpaKeys();
-      newMasterKey = lpaKeysTds->LATC_master();
-      break;
+    unsigned newMaster;
+    if  (lookupMaster(metaEvt, &newMaster) != StatusCode::SUCCESS) {
+      log << MSG::FATAL << "Unable to look up hw key" << endreq;
+      if (m_exitOnFatal) {
+        log << MSG::FATAL << "MootSvc exiting on fatal error.." << endreq;
+        exit(1);
+      }
     }
-
-    case Lsf::LciKeys: {
-      const lsfData::LciKeys *lciKeysTds = metaEvt->keys()->castToLciKeys();
-      newMasterKey = lciKeysTds->LATC_master();
-      break;
-    }
-    default: 
-      log << MSG::DEBUG << "Unknown key type in LsfEvent::MetaEvent"
-          << endreq;
-      return StatusCode::FAILURE;
-    }
-    if (newMasterKey)     m_hw = newMasterKey;
+    if (hwKeyChange = (newMaster != m_hw))   m_hw = newMaster; 
   }
 
-  // Will have to recalculate moot key if scid or start time change
-  bool recalculate = false;
+  bool recalculate = false;   // Recalc moot key if scid or start time change
   if (m_lookUpScid) {  
     SmartDataPtr<LsfEvent::LsfCcsds> ccsds(m_eventSvc, "/Event/Ccsds");
     if (!ccsds) {
@@ -419,28 +439,46 @@ StatusCode  MootSvc::updateFswEvtInfo() {
       return StatusCode::FAILURE;
     }
     unsigned newScid = ccsds->scid();
-    if (newScid != m_scid) {
-      m_scid = ccsds->scid();
-      recalculate = true;
-    }
+    if ( recalculate = (newScid != m_scid))      m_scid = ccsds->scid();
   }
   if (m_lookUpStartTime) {
     unsigned old = m_startTime;
     m_startTime = (metaEvt->run()).startTime();
-    if (recalculate || (old != m_startTime)) { // also refresh config
-      if (!m_q) {
-        m_q = makeConnection(m_verbose);
-        if (!m_q) return StatusCode::FAILURE;
-      }
-      m_mootConfigKey = lookupMootConfig(m_q, m_scid, m_startTime);
-      if (!m_mootConfigKey) {
-        MsgStream log(msgSvc(), "MootSvc");
-
-        log << MSG::ERROR << "No MOOT config for scid = " << m_scid
-            << " and StartedAt = " << m_startTime << endreq;
-        return StatusCode::FAILURE;
-      }
+    recalculate = recalculate || (old != m_startTime);
+  }
+  if (recalculate) { 
+    if (!m_q) {
+      m_q = makeConnection(m_verbose);
+      if (!m_q) return StatusCode::FAILURE;
     }
+    m_mootConfigKey = lookupMootConfig(m_q, m_scid, m_startTime);
+    if (!m_mootConfigKey) {
+      log << MSG::FATAL << "No MOOT config for scid = " << m_scid
+          << " and StartedAt = " << m_startTime << endreq;
+      if (m_exitOnFatal) {
+        log << MSG::FATAL << "MootSvc exiting on fatal error.." << endreq;
+        exit(1);
+      }
+      return StatusCode::FAILURE;
+    }
+    // Check that hw key for config matches what's in data
+    if (m_hw != m_q->getMasterKey(m_mootConfigKey)) {
+      log << MSG::FATAL << "Hw key " << m_hw << " in data does not match hw "
+      << "key belonging to Moot Config #" << m_mootConfigKey << endreq;
+      if (m_exitOnFatal) {
+        log << MSG::FATAL << "MootSvc exiting on fatal error.." << endreq;
+        exit(1);
+      }
+      return StatusCode::FAILURE;
+    }
+  }
+  else if (hwKeyChange) { // Shouldn't have key change without new moot key
+    log << MSG::FATAL << "hw key changed but Moot Config didn't!" << endreq;
+    if (m_exitOnFatal) {
+      log << MSG::FATAL << "MootSvc exiting on fatal error.." << endreq;
+      exit(1);
+    }
+    return StatusCode::FAILURE;
   }
   return StatusCode::SUCCESS;
 }
@@ -458,7 +496,7 @@ unsigned MootSvc::getActiveFilters(std::vector<CalibData::MootFilterCfg>&
   }
 
   updateFswEvtInfo();
-  if (!m_mootConfigKey) {
+  if (!m_mootConfigKey)   {
     MsgStream log(msgSvc(), "MootSvc");
     log << MSG::ERROR << "Cannot retrieve filters; no known MOOT config" 
         << endreq;
