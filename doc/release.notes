@@ -3,6 +3,7 @@
  * Coordinator:  J. Bogart
  *                  EOH
 
+   v1r1p1  13-Jun-2008  jrb  1) ExitOnFatal jo. 2) Avoid redundant look-ups
    v1r1    10-Jun-2008  jrb  New services; also bug fix in init when moot key
                              comes from job options
    v1r0p2   9-Jun-2008  jrb  Minor fix
