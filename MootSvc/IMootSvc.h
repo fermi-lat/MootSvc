@@ -1,4 +1,4 @@
-//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/MootSvc/IMootSvc.h,v 1.2 2008/06/09 19:47:07 jrb Exp $
+//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/MootSvc/IMootSvc.h,v 1.3 2008/06/11 00:00:31 jrb Exp $
 #ifndef IMootSvc_h
 #define IMootSvc_h 1
 
@@ -115,6 +115,8 @@ public:
   /// Return index in MootParmCol of specified class
   virtual int latcParmIx(const std::string& parmClass) const =0;
 
+  /// Return true if MootSvc has been turned off via job option 
+  virtual bool noMoot() const = 0;
 
   /** Get handle for metadata access from mootCore.
       Clients, especially in production code, are STRONGLY DISCOURAGED 

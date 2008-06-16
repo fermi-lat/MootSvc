@@ -1,4 +1,4 @@
-//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.h,v 1.3 2008/06/11 00:00:32 jrb Exp $
+//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.h,v 1.4 2008/06/13 18:33:37 jrb Exp $
 #ifndef MootCnvSvc_h
 #define MootCnvSvc_h  1
 
@@ -109,6 +109,10 @@ class MootSvc :  public Service,
   virtual int latcParmIx(const std::string& parmClass) const;
 
   virtual MOOT::MootQuery* getConnection() const {return m_q;}
+
+  /// Return true if MootSvc has been turned off via job option 
+  virtual bool noMoot() const {return m_noMoot;}
+
 
   // Reimplemented from IInterface
 
