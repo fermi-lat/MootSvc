@@ -1,5 +1,15 @@
 ------------------------------------------------------------
 User: jrb  Mon Jun 16 12:46:53 PDT 2008
+MootSvc/src
+
+Modified Files:
+	MootSvc.h 
+Log Message:
+Add bool IMootSvc::noMoot() query 
+
+    *
+------------------------------------------------------------
+User: jrb  Mon Jun 16 12:46:53 PDT 2008
 MootSvc/MootSvc
 
 Modified Files:
