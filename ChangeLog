@@ -1,4 +1,14 @@
 ------------------------------------------------------------
+User: jrb  Mon Jun 16 12:46:53 PDT 2008
+MootSvc/MootSvc
+
+Modified Files:
+	IMootSvc.h 
+Log Message:
+Add bool IMootSvc::noMoot() query 
+
+    *
+------------------------------------------------------------
 TAG
 Tag name: MootSvc-01-01-01, operation: add
 Package: MootSvc
