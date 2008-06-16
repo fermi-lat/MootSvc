@@ -1,4 +1,24 @@
 ------------------------------------------------------------
+TAG
+Tag name: v1r1p2, operation: add
+Package: MootSvc
+User: jrb  Mon Jun 16 12:47:54 2008
+Files:
+  MootSvc/.cvsignore  1.1.1.1
+  MootSvc/ChangeLog  1.26
+  MootSvc/MootSvc/IMootSvc.h  1.4
+  MootSvc/cmt/.cvsignore  1.1.1.1
+  MootSvc/cmt/requirements  1.7
+  MootSvc/doc/release.notes  1.6
+  MootSvc/src/mainpage.h  1.2
+  MootSvc/src/MootSvc.cxx  1.3
+  MootSvc/src/defaultOptions.txt  1.2
+  MootSvc/src/MootSvc.h  1.5
+  MootSvc/src/Dll/MootSvc_dll.cxx  1.1.1.1
+  MootSvc/src/Dll/MootSvc_load.cxx  1.1.1.1
+
+    *
+------------------------------------------------------------
 User: jrb  Mon Jun 16 12:47:47 PDT 2008
 MootSvc/doc
 
