@@ -1,4 +1,4 @@
-//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.cxx,v 1.2 2008/06/11 00:00:32 jrb Exp $
+//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.cxx,v 1.3 2008/06/13 18:33:37 jrb Exp $
 #include <cstdio>
 #include <cstdlib>
 #include <stdexcept>
@@ -300,6 +300,17 @@ MOOT::MootQuery* MootSvc::makeConnection(bool verbose) {
   }
   m_countdown = nOpen;
   return m_q;
+}
+
+unsigned MootSvc::getMootConfigKey() {
+  if (m_noMoot) {
+    MsgStream log(msgSvc(), "MootSvc");
+    log << MSG::ERROR << "MootSvc unavailable by job option request"
+        << endreq;
+    return 0;
+  }
+  updateFswEvtInfo();   // force re-compute just in case
+  return m_mootConfigKey;
 }
 
 
@@ -614,6 +625,13 @@ MOOT::InfoSrc MootSvc::getInfoItemSrc(MOOT::InfoItem item) {
   using MOOT::InfoItem;
   using MOOT::InfoSrc;
 
+  if (m_noMoot) {
+    MsgStream log(msgSvc(), "MootSvc");
+    log << MSG::ERROR << "MootSvc unavailable by job option request"
+        << endreq;
+    return MOOT::INFOSRC_UNKNOWN;
+  }
+
   switch(item) {
   case MOOT::INFOITEM_MOOTCONFIGKEY: {
     return (m_fixedConfig) ? MOOT::INFOSRC_JO : MOOT::INFOSRC_TDS;
@@ -760,6 +778,13 @@ StatusCode MootSvc::updateMootParmCol( ) {
 }
 
 std::string MootSvc::findPrecinct(const std::string& pclass) {
+  if (m_noMoot) {
+    MsgStream log(msgSvc(), "MootSvc");
+    log << MSG::ERROR << "MootSvc unavailable by job option request"
+        << endreq;
+    return std::string("");
+  }
+
   for (unsigned ix = 0; ix < m_parmPrecincts.size(); ix++) {
     if (pclass.compare(m_parmPrecincts[ix].first) == 0)
       return m_parmPrecincts[ix].second;
