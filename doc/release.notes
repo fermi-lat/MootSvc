@@ -3,6 +3,7 @@
  * Coordinator:  J. Bogart
  *                  EOH
 
+   v1r1p3  19-Jun-2008  jrb  Protect *all* public services if noMoot is true
    v1r1p2  16-Jun-2008  jrb  Add IMootSvc::noMoot()  query
    v1r1p1  13-Jun-2008  jrb  1) ExitOnFatal jo. 2) Avoid redundant look-ups
    v1r1    10-Jun-2008  jrb  New services; also bug fix in init when moot key
