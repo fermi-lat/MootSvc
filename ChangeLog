@@ -1,4 +1,14 @@
 ------------------------------------------------------------
+User: jrb  Thu Jun 19 11:49:35 PDT 2008
+MootSvc/src
+
+Modified Files:
+	MootSvc.cxx MootSvc.h 
+Log Message:
+Don't even try to get Moot Config key if MootSvc.noMoot is true
+
+    *
+------------------------------------------------------------
 TAG
 Tag name: MootSvc-01-01-02, operation: add
 Package: MootSvc
