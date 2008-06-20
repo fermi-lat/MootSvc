@@ -1,4 +1,4 @@
-//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.cxx,v 1.3 2008/06/13 18:33:37 jrb Exp $
+//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.cxx,v 1.4 2008/06/19 18:49:35 jrb Exp $
 #include <cstdio>
 #include <cstdlib>
 #include <stdexcept>
@@ -59,7 +59,7 @@ namespace {
     MOOT::AcqSummaryInfo* pAcqInfo = 
       q->getAcqSummaryInfo(startedAt, scid);
     if (!pAcqInfo) return 0;
-    std::string keyStr = pAcqInfo->getKey();
+    std::string keyStr = pAcqInfo->getConfigKey();
     if (keyStr.empty()) return 0;
     unsigned mootKey = facilities::Util::stringToUnsigned(keyStr);
     delete pAcqInfo;
