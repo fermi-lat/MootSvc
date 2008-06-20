@@ -1,4 +1,14 @@
 ------------------------------------------------------------
+User: jrb  Thu Jun 19 17:25:47 PDT 2008
+MootSvc/src
+
+Modified Files:
+	MootSvc.cxx 
+Log Message:
+Get the right key from Acq_summary table!
+
+    *
+------------------------------------------------------------
 TAG
 Tag name: MootSvc-01-01-03, operation: add
 Package: MootSvc
