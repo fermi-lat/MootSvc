@@ -3,6 +3,8 @@
  * Coordinator:  J. Bogart
  *                  EOH
 
+   v1r1p5  20-Jun-2008  jrb  Use SLAC-centric default archive for Windows as
+                             well as Windows if not specified in job options
    v1r1p4  19-Jun-2008  jrb  Bug fix in lookupMootConfig
    v1r1p3  19-Jun-2008  jrb  Protect *all* public services if noMoot is true
    v1r1p2  16-Jun-2008  jrb  Add IMootSvc::noMoot()  query
