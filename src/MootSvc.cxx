@@ -1,4 +1,4 @@
-//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.cxx,v 1.4 2008/06/19 18:49:35 jrb Exp $
+//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.cxx,v 1.5 2008/06/20 00:25:46 jrb Exp $
 #include <cstdio>
 #include <cstdlib>
 #include <stdexcept>
@@ -243,8 +243,12 @@ MOOT::MootQuery* MootSvc::makeConnection(bool verbose) {
   static unsigned nOpen = 4;     // keep MySQL connection for this many events
   if (m_q) return m_q;
 
-  const std::string slacDefault("/afs/slac/glast/g/moot/archive-mood");
-
+#ifdef WIN32
+  const std::string 
+    slacDefault("\\\\Slaccfs\\slac_afs\\g\\glast\\moot\\archive-mood");
+#else
+  const std::string slacDefault("/afs/slac/g/glast/moot/archive-mood");
+#endif
   std::string archEnv("$(MOOT_ARCHIVE)");
   std::string archEnvName("MOOT_ARCHIVE");
 
@@ -259,9 +263,12 @@ MOOT::MootQuery* MootSvc::makeConnection(bool verbose) {
 
   if (m_archive.size() == 0 ) {
     // Check to see if MOOT_ARCHIVE has a value.  
-    int nExpand = facilities::Util::expandEnvVar(&archEnv);
-    if (nExpand > 0) envSet = true;
-    // If not, set m_archive to 
+    const char *transEnv = ::getenv(archEnv.c_str());
+    if (transEnv) {
+      int nExpand = facilities::Util::expandEnvVar(&archEnv);
+      envSet = true;
+    }
+      // If not, set m_archive to 
     else m_archive = slacDefault;
   }
   if (!envSet) {
