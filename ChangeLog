@@ -1,4 +1,16 @@
 ------------------------------------------------------------
+User: jrb  Fri Jun 20 17:08:10 PDT 2008
+MootSvc/src
+
+Modified Files:
+	MootSvc.cxx 
+Log Message:
+Set a sensible default for MOOT_ARCHIVE for Windows machines (namely
+something that works for machines with access to slac afs) as well as Linux.
+Also don't get upset if no value of environment variable has been set.
+
+    *
+------------------------------------------------------------
 TAG
 Tag name: MootSvc-01-01-04, operation: add
 Package: MootSvc
