@@ -1,6 +1,6 @@
 package MootSvc
 
-# $Header: /nfs/slac/g/glast/ground/cvs/MootSvc/cmt/requirements,v 1.9 2008/06/20 00:26:02 jrb Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/MootSvc/cmt/requirements,v 1.10 2008/06/21 01:08:40 jrb Exp $
 
 version v1r1p5
 
@@ -30,7 +30,7 @@ use Event    v*
 ##use GlastSvc v9r* -no_auto_imports
 ##use RootIo v* -no_auto_imports
 
-use Event v11r* -no_auto_imports
+##use Event v11r* -no_auto_imports
 ##use rootTestData v* -no_auto_imports
 
 # Only needed if this package has its own test program
