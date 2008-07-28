@@ -3,6 +3,7 @@
  * Coordinator:  J. Bogart
  *                  EOH
 
+   v1r1p6  28-Jul-2008  jrb  Get rid of extra 'use' of Event; already have one
    v1r1p5  20-Jun-2008  jrb  Use SLAC-centric default archive for Windows as
                              well as Windows if not specified in job options
    v1r1p4  19-Jun-2008  jrb  Bug fix in lookupMootConfig
