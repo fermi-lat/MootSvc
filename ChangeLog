@@ -1,4 +1,14 @@
 ------------------------------------------------------------
+User: jrb  Mon Jul 28 08:09:01 PDT 2008
+MootSvc/cmt
+
+Modified Files:
+	requirements 
+Log Message:
+Get rid of extra use statement
+
+    *
+------------------------------------------------------------
 TAG
 Tag name: MootSvc-01-01-05, operation: add
 Package: MootSvc
