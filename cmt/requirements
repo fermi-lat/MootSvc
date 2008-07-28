@@ -1,8 +1,8 @@
 package MootSvc
 
-# $Header: /nfs/slac/g/glast/ground/cvs/MootSvc/cmt/requirements,v 1.10 2008/06/21 01:08:40 jrb Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/MootSvc/cmt/requirements,v 1.11 2008/07/28 15:09:01 jrb Exp $
 
-version v1r1p5
+version v1r1p6
 
 author Joanne Bogart <jrb@slac.stanford.edu>
 
