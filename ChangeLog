@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: ecephas  Fri Aug 15 14:22:43 PDT 2008
+GlastRelease-scons/MootSvc
+
+Added Files:
+	SConscript 
+Log Message:
+Added SConscript files for packages
+    *
+------------------------------------------------------------
 TAG
 Tag name: MootSvc-01-01-06, operation: add
 Package: MootSvc
