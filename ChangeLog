@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: ecephas  Fri Aug 15 14:42:36 PDT 2008
+GlastRelease-scons/MootSvc
+
+Added Files:
+	MootSvcLib.py 
+Log Message:
+Added Lib file (e.g., <package>Lib.py) for each package that creates a library.
+    *
+------------------------------------------------------------
 User: ecephas  Fri Aug 15 14:22:43 PDT 2008
 GlastRelease-scons/MootSvc
 
