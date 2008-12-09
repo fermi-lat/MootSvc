@@ -2,6 +2,16 @@
 TAG
 Tag name: MootSvc-01-01-06, operation: add
 Package: MootSvc
+User: ecephas  Mon Dec  8 16:08:38 2008
+Files:
+  MootSvc/MootSvcLib.py  1.1
+  MootSvc/MootSvcLib.py  1.1
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: MootSvc-01-01-06, operation: add
+Package: MootSvc
 User: ecephas  Mon Dec  8 13:40:10 2008
 Files:
   MootSvc/SConscript  1.2
