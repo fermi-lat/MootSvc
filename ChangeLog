@@ -1,5 +1,27 @@
 ------------------------------------------------------------
 TAG
+Tag name: GlastRelease-15-50-10, operation: add
+Package: MootSvc
+User: glastrm  Thu Jan  8 14:54:32 2009
+Files:
+  MootSvc/.cvsignore  1.1.1.1
+  MootSvc/ChangeLog  1.98
+  MootSvc/MootSvcLib.py  1.1
+  MootSvc/SConscript  1.2
+  MootSvc/MootSvc/IMootSvc.h  1.4
+  MootSvc/cmt/.cvsignore  1.1.1.1
+  MootSvc/cmt/requirements  1.12
+  MootSvc/doc/release.notes  1.10
+  MootSvc/src/mainpage.h  1.2
+  MootSvc/src/MootSvc.cxx  1.6
+  MootSvc/src/defaultOptions.txt  1.2
+  MootSvc/src/MootSvc.h  1.6
+  MootSvc/src/Dll/MootSvc_dll.cxx  1.1.1.1
+  MootSvc/src/Dll/MootSvc_load.cxx  1.1.1.1
+
+    *
+------------------------------------------------------------
+TAG
 Tag name: GlastRelease-15-49-00, operation: add
 Package: MootSvc
 User: glastrm  Thu Jan  8 10:57:18 2009
