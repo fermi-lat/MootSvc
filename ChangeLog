@@ -1,5 +1,15 @@
 ------------------------------------------------------------
 TAG
+Tag name: GlastRelease-15-49-00, operation: add
+Package: MootSvc
+User: glastrm  Fri Jan  9 13:24:08 2009
+Files:
+  MootSvc/MootSvcLib.py  1.1
+  MootSvc/SConscript  1.2
+
+    *
+------------------------------------------------------------
+TAG
 Tag name: GlastRelease-15-50-10, operation: del
 Package: MootSvc
 User: glastrm  Fri Jan  9 08:30:39 2009
