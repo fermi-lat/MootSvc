@@ -9,3 +9,5 @@ Visual
 setup.*
 *.mak*
 VC8*
+build
+*.pyc
