@@ -1,4 +1,14 @@
 ------------------------------------------------------------
+User: jrb  Thu Sep 10 18:19:17 PDT 2009
+GlastRelease-scons/MootSvc/src
+
+Modified Files:
+	MootSvc.cxx 
+Log Message:
+Eliminate compiler warning
+
+    *
+------------------------------------------------------------
 User: jrb  Thu Aug 27 09:39:00 PDT 2009
 GlastRelease-scons/MootSvc
 
