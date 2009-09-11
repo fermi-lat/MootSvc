@@ -2,6 +2,16 @@
 TAG
 Tag name: MootSvc-01-01-07, operation: add
 Package: MootSvc
+User: jrb  Thu Sep 10 18:24:11 2009
+Files:
+  MootSvc/cmt/.cvsignore  1.1.1.1
+  MootSvc/cmt/requirements  1.13
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: MootSvc-01-01-07, operation: add
+Package: MootSvc
 User: jrb  Thu Sep 10 18:24:05 2009
 Files:
   MootSvc/.cvsignore  1.2
