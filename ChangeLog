@@ -2,6 +2,20 @@
 TAG
 Tag name: MootSvc-01-01-07, operation: add
 Package: MootSvc
+User: jrb  Thu Sep 10 18:24:28 2009
+Files:
+  MootSvc/src/mainpage.h  1.2
+  MootSvc/src/MootSvc.cxx  1.7
+  MootSvc/src/defaultOptions.txt  1.2
+  MootSvc/src/MootSvc.h  1.6
+  MootSvc/src/Dll/MootSvc_dll.cxx  1.1.1.1
+  MootSvc/src/Dll/MootSvc_load.cxx  1.1.1.1
+
+    *
+------------------------------------------------------------
+TAG
+Tag name: MootSvc-01-01-07, operation: add
+Package: MootSvc
 User: jrb  Thu Sep 10 18:24:22 2009
 Files:
   MootSvc/MootSvc/IMootSvc.h  1.4
