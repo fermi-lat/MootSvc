@@ -1,4 +1,16 @@
 ------------------------------------------------------------
+TAG
+Tag name: MootSvc-01-01-07, operation: add
+Package: MootSvc
+User: jrb  Thu Sep 10 18:24:05 2009
+Files:
+  MootSvc/.cvsignore  1.2
+  MootSvc/ChangeLog  1.116
+  MootSvc/MootSvcLib.py  1.2
+  MootSvc/SConscript  1.5
+
+    *
+------------------------------------------------------------
 User: jrb  Thu Sep 10 18:23:59 PDT 2009
 GlastRelease-scons/MootSvc/doc
 
