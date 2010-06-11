@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jrb  Thu Jun 10 17:38:43 PDT 2010
+GlastRelease-scons/MootSvc
+
+Modified Files:
+	SConscript 
+Log Message:
+updates for SCons build
+    *
+------------------------------------------------------------
 TAG
 Tag name: MootSvc-01-01-07, operation: add
 Package: MootSvc
