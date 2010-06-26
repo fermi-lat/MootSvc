@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jrb  Fri Jun 25 18:02:09 PDT 2010
+GlastRelease-scons/MootSvc
+
+Modified Files:
+	MootSvcLib.py 
+Log Message:
+add dependence on CalibData
+    *
+------------------------------------------------------------
 User: jrb  Thu Jun 10 17:38:43 PDT 2010
 GlastRelease-scons/MootSvc
 
