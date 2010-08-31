@@ -1,5 +1,15 @@
 ------------------------------------------------------------
 User: heather  Mon Aug 30 20:11:23 PDT 2010
+MootSvc/src
+
+Modified Files:
+      Tag: GlastReleasev18r6p1
+	MootSvc.cxx 
+Log Message:
+move to Gaudi v21r7
+    *
+------------------------------------------------------------
+User: heather  Mon Aug 30 20:11:23 PDT 2010
 MootSvc/doc
 
 Modified Files:
