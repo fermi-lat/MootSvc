@@ -1,4 +1,14 @@
 ------------------------------------------------------------
+User: heather  Mon Aug 30 20:11:23 PDT 2010
+MootSvc/cmt
+
+Modified Files:
+      Tag: GlastReleasev18r6p1
+	requirements 
+Log Message:
+move to Gaudi v21r7
+    *
+------------------------------------------------------------
 User: jrb  Fri Jun 25 18:02:09 PDT 2010
 GlastRelease-scons/MootSvc
 
