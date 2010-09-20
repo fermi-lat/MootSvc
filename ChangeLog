@@ -1,4 +1,14 @@
 ------------------------------------------------------------
+User: heather  Mon Sep 20 09:13:41 PDT 2010
+MootSvc
+
+Modified Files:
+      Tag: GlastReleasev18r6p1
+	SConscript 
+Log Message:
+update version tag
+    *
+------------------------------------------------------------
 TAG
 Tag name: MootSvc-01-01-08, operation: add
 Package: MootSvc
