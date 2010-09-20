@@ -1,4 +1,26 @@
 ------------------------------------------------------------
+TAG
+Tag name: MootSvc-01-01-07-gr01, operation: add
+Package: MootSvc
+User: heather  Mon Sep 20 09:14:00 2010
+Files:
+  MootSvc/.cvsignore  1.2
+  MootSvc/ChangeLog  1.116
+  MootSvc/MootSvcLib.py  1.2
+  MootSvc/SConscript  1.5.20.1
+  MootSvc/MootSvc/IMootSvc.h  1.4
+  MootSvc/cmt/.cvsignore  1.1.1.1
+  MootSvc/cmt/requirements  1.13.20.1
+  MootSvc/doc/release.notes  1.11.20.1
+  MootSvc/src/mainpage.h  1.2
+  MootSvc/src/MootSvc.cxx  1.7.20.1
+  MootSvc/src/defaultOptions.txt  1.2
+  MootSvc/src/MootSvc.h  1.6
+  MootSvc/src/Dll/MootSvc_dll.cxx  1.1.1.1
+  MootSvc/src/Dll/MootSvc_load.cxx  1.1.1.1
+
+    *
+------------------------------------------------------------
 User: heather  Mon Sep 20 09:13:41 PDT 2010
 MootSvc
 
