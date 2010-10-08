@@ -1,4 +1,4 @@
-//$Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/MootSvc/src/MootSvc.cxx,v 1.6 2008/06/21 00:08:10 jrb Exp $
+//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.cxx,v 1.7.20.1 2010/08/31 03:11:23 heather Exp $
 #include <cstdio>
 #include <cstdlib>
 #include <stdexcept>
@@ -29,8 +29,9 @@
 
 
 /// Instantiation of a static factory to create instances of this service
-static SvcFactory<MootSvc>          MootSvc_factory;
-const ISvcFactory& MootSvcFactory = MootSvc_factory;
+//static SvcFactory<MootSvc>          MootSvc_factory;
+//const ISvcFactory& MootSvcFactory = MootSvc_factory;
+DECLARE_SERVICE_FACTORY(MootSvc);
 
 namespace {
 
