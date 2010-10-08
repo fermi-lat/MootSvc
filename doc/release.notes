@@ -3,7 +3,9 @@
  * Coordinator:  J. Bogart
  *                  EOH
 
+ MootSvc-01-01-08-gr01 06-Oct-2010 hmk upgrade Gaudi v21r7 along branch
  MootSvc-01-01-08 31-Aug-2010    jrb tag updates for SCons migration
+ MootSvc-01-01-07-gr01 31-Aug-2010 hmk Move to gaudi v21r7
  MootSvc-01-01-07 10-Sep-2009    jrb Fix compiler warnings
     Upgrades for SCons build
    v1r1p6  28-Jul-2008  jrb  Get rid of extra 'use' of Event; already have one
