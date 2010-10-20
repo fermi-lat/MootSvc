@@ -1,4 +1,14 @@
 ------------------------------------------------------------
+User: jrb  Wed Oct 20 11:15:03 PDT 2010
+GlastRelease-scons/MootSvc
+
+Modified Files:
+      Tag: GlastReleasev18r7p1
+	SConscript 
+Log Message:
+Get SCons to make rootmap
+    *
+------------------------------------------------------------
 TAG
 Tag name: MootSvc-01-01-08-gr01, operation: add
 Package: MootSvc
