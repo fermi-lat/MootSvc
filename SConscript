@@ -1,5 +1,5 @@
 # -*- python -*-
-# $Header: /nfs/slac/g/glast/ground/cvs/MootSvc/SConscript,v 1.5.20.1 2010/09/20 16:13:41 heather Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/MootSvc/SConscript,v 1.7.2.1 2010/10/08 16:36:06 heather Exp $
 # Authors: Joanne Bogart <jrb@slac.stanford.edu>
 # Version: MootSvc-01-01-08-gr01
 
@@ -10,8 +10,8 @@ Import('packages')
 libEnv = baseEnv.Clone()
 
 libEnv.Tool('addLinkDeps', package='MootSvc', toBuild='component')
-MootSvc = libEnv.SharedLibrary('MootSvc',
-                               listFiles(['src/*.cxx','src/Dll/*.cxx']))
+MootSvc = libEnv.ComponentLibrary('MootSvc',
+                                  listFiles(['src/*.cxx']))
 
 #progEnv.Tool('MootSvcLib')
 libEnv.Tool('registerTargets', package = 'MootSvc',
