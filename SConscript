@@ -1,7 +1,7 @@
 # -*- python -*-
-# $Header: /nfs/slac/g/glast/ground/cvs/MootSvc/SConscript,v 1.6 2010/06/11 00:38:43 jrb Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/MootSvc/SConscript,v 1.7 2010/08/31 18:28:36 jrb Exp $
 # Authors: Joanne Bogart <jrb@slac.stanford.edu>
-# Version: MootSvc-01-01-08
+# Version: MootSvc-01-01-09
 Import('baseEnv')
 Import('listFiles')
 Import('packages')
