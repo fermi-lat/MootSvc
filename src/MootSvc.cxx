@@ -1,4 +1,4 @@
-//$Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/MootSvc/src/MootSvc.cxx,v 1.6 2008/06/21 00:08:10 jrb Exp $
+//$Header: /nfs/slac/g/glast/ground/cvs/MootSvc/src/MootSvc.cxx,v 1.7 2009/09/11 01:19:17 jrb Exp $
 #include <cstdio>
 #include <cstdlib>
 #include <stdexcept>
@@ -245,7 +245,7 @@ MOOT::MootQuery* MootSvc::makeConnection(bool verbose) {
 
 #ifdef WIN32
   const std::string 
-    slacDefault("\\\\Slaccfs\\slac_afs\\g\\glast\\moot\\archive-mood");
+    slacDefault("\\\\samba01\\slac_afs\\g\\glast\\moot\\archive-mood");
 #else
   const std::string slacDefault("/afs/slac/g/glast/moot/archive-mood");
 #endif
