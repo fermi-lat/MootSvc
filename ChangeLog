@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jrb  Sat Feb 26 08:52:07 PST 2011
+MootSvc/src
+
+Modified Files:
+	MootSvc.cxx 
+Log Message:
+substitute samba01 for non-working alias Slaccfs
+    *
+------------------------------------------------------------
 TAG
 Tag name: MootSvc-01-01-09, operation: add
 Package: MootSvc
