@@ -1,5 +1,14 @@
 ------------------------------------------------------------
 User: heather  Mon Dec 12 12:53:30 PST 2011
+GlastRelease-scons/MootSvc/src
+
+Modified Files:
+	MootSvc.cxx 
+Log Message:
+merge Gaudi v21r7
+    *
+------------------------------------------------------------
+User: heather  Mon Dec 12 12:53:30 PST 2011
 GlastRelease-scons/MootSvc/doc
 
 Modified Files:
