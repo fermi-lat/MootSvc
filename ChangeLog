@@ -1,4 +1,26 @@
 ------------------------------------------------------------
+TAG
+Tag name: MootSvc-01-03-00, operation: add
+Package: MootSvc
+User: jrb  Fri Aug 17 12:05:02 2012
+Files:
+  MootSvc/.cvsignore  1.2
+  MootSvc/ChangeLog  1.256
+  MootSvc/MootSvcLib.py  1.4
+  MootSvc/SConscript  1.11
+  MootSvc/MootSvc/IMootSvc.h  1.4
+  MootSvc/cmt/.cvsignore  1.1.1.1
+  MootSvc/cmt/requirements  1.18
+  MootSvc/doc/release.notes  1.16
+  MootSvc/src/mainpage.h  1.2
+  MootSvc/src/MootSvc.cxx  1.9
+  MootSvc/src/defaultOptions.txt  1.2
+  MootSvc/src/MootSvc.h  1.6
+  MootSvc/src/Dll/MootSvc_dll.cxx  1.1.1.1
+  MootSvc/src/Dll/MootSvc_load.cxx  1.1.1.1
+
+    *
+------------------------------------------------------------
 User: jrb  Fri Aug 17 12:00:11 PDT 2012
 MootSvc/cmt
 
