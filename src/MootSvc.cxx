@@ -1,4 +1,4 @@
-//$Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/MootSvc/src/MootSvc.cxx,v 1.8 2011/02/26 16:52:07 jrb Exp $
+//$Header: /nfs/slac/g/glast/ground/cvs/GlastRelease-scons/MootSvc/src/MootSvc.cxx,v 1.9 2011/12/12 20:53:30 heather Exp $
 #include <cstdio>
 #include <cstdlib>
 #include <stdexcept>
@@ -264,7 +264,7 @@ MOOT::MootQuery* MootSvc::makeConnection(bool verbose) {
 
   if (m_archive.size() == 0 ) {
     // Check to see if MOOT_ARCHIVE has a value.  
-    const char *transEnv = ::getenv(archEnv.c_str());
+    const char *transEnv = ::getenv(archEnvName.c_str());
     if (transEnv) {
       facilities::Util::expandEnvVar(&archEnv);
       envSet = true;
