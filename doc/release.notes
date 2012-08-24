@@ -3,6 +3,7 @@
  * Coordinator:  J. Bogart
  *                  EOH
 
+ MootSvc-01-03-01 23-Aug-2012    jrb Properly detect if MOOT_ARCHIVE env is set
  MootSvc-01-03-00 17-Aug-2012    jrb for Windows no-install-headers
  MootSvc-01-02-00 08-Dec-2011    hmk Merge in Gaudi v21r7 mods
  MootSvc-01-01-10 26-Feb-2011    jrb Get Windows access to SLAC Moot archive working again
