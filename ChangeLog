@@ -1,4 +1,13 @@
 ------------------------------------------------------------
+User: jrb  Thu Aug 23 17:29:01 PDT 2012
+GlastRelease-scons/MootSvc/src
+
+Modified Files:
+	MootSvc.cxx 
+Log Message:
+properly detect if MOOT_ARCHIVE env. is set
+    *
+------------------------------------------------------------
 TAG
 Tag name: GlastRelease-20-04-02, operation: add
 Package: MootSvc
