@@ -1,6 +1,6 @@
 package MootSvc
 
-# $Header: /nfs/slac/g/glast/ground/cvs/MootSvc/cmt/requirements,v 1.18 2012/08/17 19:00:11 jrb Exp $
+# $Header: /nfs/slac/g/glast/ground/cvs/MootSvc/cmt/requirements,v 1.19 2012/08/24 00:29:40 jrb Exp $
 
 version v1r3p1
 
@@ -24,7 +24,7 @@ use MYSQLEXT * IExternal v*
 use LdfEvent v*
 use Event    v*
 
-use RootmapPolicy * GlastPolicy
+#use RootmapPolicy * GlastPolicy
 
 ## Following line doesn't appear in real requirements, though maybe it should,
 ## because GlastSvc and RootIo already drag in Event
@@ -42,6 +42,6 @@ apply_pattern package_headers
 
 library MootSvc *.cxx $(MootSvc_headers)
 
-apply_pattern generate_rootmap library=MootSvc
+#apply_pattern generate_rootmap library=MootSvc
 
 
