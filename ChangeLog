@@ -1,5 +1,27 @@
 ------------------------------------------------------------
 TAG
+Tag name: GlastRelease-17-35-24-lp46, operation: add
+Package: MootSvc
+User: heather  Sun Jun  2 21:20:30 2013
+Files:
+  MootSvc/.cvsignore  1.2
+  MootSvc/ChangeLog  1.147
+  MootSvc/MootSvcLib.py  1.3
+  MootSvc/SConscript  1.9.40.1
+  MootSvc/MootSvc/IMootSvc.h  1.4
+  MootSvc/cmt/.cvsignore  1.1.1.1
+  MootSvc/cmt/requirements  1.16.40.1
+  MootSvc/doc/release.notes  1.14.40.1
+  MootSvc/src/mainpage.h  1.2
+  MootSvc/src/MootSvc.cxx  1.8.40.1
+  MootSvc/src/defaultOptions.txt  1.2
+  MootSvc/src/MootSvc.h  1.6
+  MootSvc/src/Dll/MootSvc_dll.cxx  1.1.1.1
+  MootSvc/src/Dll/MootSvc_load.cxx  1.1.1.1
+
+    *
+------------------------------------------------------------
+TAG
 Tag name: GlastRelease-17-35-24-lp45, operation: add
 Package: MootSvc
 User: heather  Tue May 28 10:58:52 2013
